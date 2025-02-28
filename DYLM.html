@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kỷ yếu ???</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            overflow: hidden;
+            transition: background-color 1s ease;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+        }
+        .header-image, .response-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            object-fit: contain;
+            transition: opacity 1s ease;
+        }
+        .response-image {
+            display: none;
+        }
+        .question {
+            font-size: 24px;
+            margin-bottom: 20px;
+            transition: opacity 1s ease;
+        }
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            transition: opacity 1s ease;
+        }
+        .options button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 120px;
+            background-color: #FF0099;
+            color: white;
+        }
+        .response {
+            font-size: 32px;
+            color: rgb(0, 109, 128);
+            opacity: 0;
+            transition: opacity 1s ease, transform 1s ease;
+            transform: translateY(50px);
+        }
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hide {
+            opacity: 0;
+        }
+        .new-background {
+            background-color: #ffcccb;
+        }
+
+        /* Ẩn chữ alt khi ảnh không tải được */
+        img {
+            font-size: 0;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-image, .response-image {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="love.gif" alt="" class="header-image" id="header-image">
+    </div>
+    <div class="image-container">
+        <img src="iknewit.webp" alt="" class="response-image" id="response-image">
+    </div>
+    <div class="question">Chụp kỉ yếu với t nhá ?</div>
+    <div class="options">
+        <button id="yes" onclick="showResponse()">Yes</button>
+        <button id="no" onclick="moveButton()">No</button>
+    </div>
+    <div class="response" id="response">Bik mà! 😍</div>
+
+    <script>
+        function moveButton() {
+            const noButton = document.getElementById('no');
+            const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
+        }
+
+        function showResponse() {
+            document.querySelector('.question').classList.add('hide');
+            document.querySelector('.options').classList.add('hide');
+            document.body.classList.add('new-background');
+
+            // Cập nhật ảnh đầu trang
+            const headerImage = document.getElementById('header-image');
+            headerImage.src = "new-image.gif";
+
+            // Hiển thị ảnh phản hồi
+            const responseImage = document.getElementById('response-image');
+            responseImage.style.display = 'block';
+
+            // Hiển thị nội dung phản hồi
+            setTimeout(() => {
+                document.getElementById('response').classList.add('show');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
